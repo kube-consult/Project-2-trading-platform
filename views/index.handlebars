@@ -1,0 +1,98 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Burgers</h1>
+  <img src="../../assets/burger.jpeg" alt="Girl in a jacket" style="width:250px;height:200px;">
+  <p class="lead"></p>
+</div>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Ready</h4>
+      </div>
+      <div class="card-body card-body-1">
+        <ul>
+          {{#each burgers }}
+          {{#unless dataValues.devoured}}
+          <div class="input-group mb-3">
+            <input type="text" class="form-control burger-update" data-id="{{dataValues.id}}" readonly="readonly" placeholder="{{dataValues.burger}}" aria-label="{{dataValues.burger}}"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Devour</button>
+            </div>
+          </div>
+          {{/unless}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Add</h4>
+      </div>
+      <div class="card-body card-body-2">
+        <form>
+          <div class="form-row">
+
+            <div class="col">
+              <input type="text" class="form-control burger-input" placeholder="Burger Name">
+            </div>
+          </div>
+        </form>
+        <br>
+        <button type="button" class="btn btn-lg btn-block btn-primary">Create Burger</button>
+
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Devoured</h4>
+      </div>
+      <div class="card-body card-body-3">
+        <ul>
+          {{#each burgers }}
+          {{#if dataValues.devoured}}
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" readonly="readonly" placeholder="{{dataValues.burger}}" aria-label="{{dataValues.burger}}"
+              aria-describedby="basic-addon2">
+          </div>
+          {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">&copy; 2019-2020</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Cool Burgers</a></li>
+          <li><a class="text-muted" href="#">Random Eating</a></li>
+          <li><a class="text-muted" href="#">Add your burgers</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Buns</a></li>
+          <li><a class="text-muted" href="#">Salads</a></li>
+          <li><a class="text-muted" href="#">Meats</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Team</a></li>
+          <li><a class="text-muted" href="#">Locations</a></li>
+          <li><a class="text-muted" href="#">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
