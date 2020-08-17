@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "Marc9578@@",
+    "password": "Snoopy123!",
     "database": "Trading_DB",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "Snoopy123!",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
