@@ -2,3 +2,39 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+img{
+  width: 100px;
+  height: 50%;
+}
+.page-footer {
+  flex-shrink: 0;
+}
+.navbar {
+  background-color: #182b40;
+  color: white;
+}
+
+.top-button{
+  display: flex;
+  justify-content: end;
+}
+a.navbar-brand{
+  color: orange;
+}
+a.nav-link{
+  color: orange;
+}
+
+.second-navbar{
+  justify-content: space-around;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
