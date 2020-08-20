@@ -10,7 +10,6 @@ const exphbs = require("express-handlebars");
 const PORT = process.env.PORT || 8080;
 const db = require("./models");
 
-
 // Creating express app and configuring middleware needed for authentication
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -23,12 +22,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.engine('handlebars', exphbs({
-  defaultLayout: 'main',
-  layoutsDir: __dirname + '/views/layouts/',
-  partialsDir: __dirname + '/views/partials/'
-}));
-app.set('view engine', 'handlebars');
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    layoutsDir: __dirname + "/views/layouts/",
+    partialsDir: __dirname + "/views/partials/"
+  })
+);
+app.set("view engine", "handlebars");
 
 // Requiring our routes
 require("./routes/html-routes.js")(app);
