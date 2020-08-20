@@ -39,8 +39,12 @@ footer {
   width: 100%;
   color: white;
   text-align: center;
-<<<<<<< HEAD
+  background-color: #231f20
 }
+
+
+
+
 a.button1{
   background-color: black;
   color: white;
@@ -66,9 +70,17 @@ a.button1{
   display:block;
   margin:0.4em auto;
 }
-}
-=======
-  background-color: #231f20
+
+.container-2 {
+  padding: 2rem 0rem;
 }
 
->>>>>>> a8c79f8420073b2aaf348d3d7d082c875b699401
+h4 {
+  margin: 2rem 0rem 1rem;
+}
+
+.table-image {
+  td, th {
+    vertical-align: middle;
+  }
+}

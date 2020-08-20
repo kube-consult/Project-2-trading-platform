@@ -2,18 +2,14 @@
   "development": {
     "username": "root",
 
-<<<<<<< HEAD
-    "password": "",
-=======
-    "password": "12345",
->>>>>>> a8c79f8420073b2aaf348d3d7d082c875b699401
+    "password": "Foster9578@Feb@",
     "database": "Trading_DB",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "12345",
+    "password": "Foster9578@Feb@",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
