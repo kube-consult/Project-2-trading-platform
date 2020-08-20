@@ -22,6 +22,11 @@ module.exports = function(app) {
     res.render("login");
   });
 
+  app.get("/trade", (req, res) => {
+    console.log("test 2");
+    res.render("trade");
+  });
+
   app.get("/cards", (req, res) => {
     if (!req.user) {
       res.render("login");
