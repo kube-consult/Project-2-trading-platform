@@ -12,7 +12,7 @@ $(document).ready(() => {
     userData = {
       longCard: longCard.val().trim(),
       expire: expire.val().trim(),
-      lastThree: lastThree.val().trim(),
+      lastThree: lastThree.val().trim()
     };
     console.log("test 5");
 
