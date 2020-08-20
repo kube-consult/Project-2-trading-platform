@@ -34,6 +34,25 @@ module.exports = function(app) {
       });
   });
 
+  app.post("/api/card", (req, res) => {
+    console.log("test11");
+    console.log(req.user);
+    // req.user.createCards(
+    db.Cards.create({
+      longNumber: req.body.data.longCard,
+      expire: req.body.data.expire,
+      lastThree: req.body.data.lastThree,
+      UserId: req.user.id
+    })
+      //)
+      .then(() => {
+        res.send("ok");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();

@@ -1,15 +1,15 @@
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
   const Cards = sequelize.define("Cards", {
-    LongCarNumber: {
+    longNumber: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    expirer: {
+    expire: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    ThreeDigit: {
+    lastThree: {
       type: DataTypes.STRING,
       allowNull: false
     }
