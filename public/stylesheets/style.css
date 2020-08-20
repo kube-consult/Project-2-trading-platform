@@ -30,6 +30,8 @@ a.nav-link{
   justify-content: space-around;
 }
 
+
+
 footer {
   position: fixed;
   left: 0;
@@ -37,6 +39,7 @@ footer {
   width: 100%;
   color: white;
   text-align: center;
+<<<<<<< HEAD
 }
 a.button1{
   background-color: black;
@@ -64,3 +67,8 @@ a.button1{
   margin:0.4em auto;
 }
 }
+=======
+  background-color: #231f20
+}
+
+>>>>>>> a8c79f8420073b2aaf348d3d7d082c875b699401
