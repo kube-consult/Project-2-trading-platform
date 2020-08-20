@@ -30,6 +30,8 @@ a.nav-link{
   justify-content: space-around;
 }
 
+
+
 footer {
   position: fixed;
   left: 0;
@@ -37,4 +39,6 @@ footer {
   width: 100%;
   color: white;
   text-align: center;
+  background-color: #231f20
 }
+
