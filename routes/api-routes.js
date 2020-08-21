@@ -8,6 +8,7 @@ module.exports = function(app) {
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
+    console.log("test1");
     res.json({
       email: req.user.email,
       id: req.user.id
@@ -19,11 +20,33 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
     db.User.create({
-      email: req.body.email,
-      password: req.body.password
+      first: req.body.data.first,
+      last: req.body.data.last,
+      email: req.body.data.email,
+      password: req.body.data.password,
+      address: req.body.data.address
     })
       .then(() => {
-        res.redirect(307, "/api/login");
+        res.send("ok");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.post("/api/card", (req, res) => {
+    console.log("test11");
+    console.log(req.user);
+    // req.user.createCards(
+    db.Cards.create({
+      longNumber: req.body.data.longCard,
+      expire: req.body.data.expire,
+      lastThree: req.body.data.lastThree,
+      UserId: req.user.id
+    })
+      //)
+      .then(() => {
+        res.send("ok");
       })
       .catch(err => {
         res.status(401).json(err);
