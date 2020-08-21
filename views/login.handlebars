@@ -1,0 +1,31 @@
+  {{> header}}
+
+<div class="container-fluid">
+  <div class="row justify-content-between">
+    {{!-- leftSide --}}
+  {{> leftSide}}
+  <div class="container col-sm-6 bg-secondary text-white">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Login Form</h2>
+        <form class="login">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email-input" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password-input" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <br />
+        <p>Or sign up <a href="/signup"><button type="submit" class="btn btn-success">here</button></a></p>
+      </div>
+    </div>
+  </div>
+<!-- Right Side -->
+    {{> rightSide}}
+  </div>
+</div>
+  {{> footer}}

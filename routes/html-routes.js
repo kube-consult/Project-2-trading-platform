@@ -67,58 +67,66 @@ module.exports = function(app) {
       console.log(res.body);
       res.render("index", body);
     });
-    //   axios({
-    //     method: "GET",
-    //     url:
-    //       "https://finnhub.io/api/v1/stock/profile2?symbol=" +
-    //       code +
-    //       "&token=" +
-    //       apiKey,
-    //     responseType: { json: true }
-    //   }).then(body => {
-    //     console.log("     ------     ");
-    //     console.log("Country: " + body.country);
-    //     console.log("Currency: " + body.currency);
-    //     console.log("Listed Exchange: " + body.exchange);
-    //     console.log(body.logo);
-    //     console.log("_______________");
-
-    //     res.render("index", body);
-    //   });
   });
 
-  // Route for getting market news data
-  // app.get("/market-news", (req, res) => {
-  //   axios({
-  //     method: "GET",
-  //     url: "https://finnhub.io/api/v1/news?category=general&token=" + apiKey,
-  //     responseType: { json: true }
-  //   }).then(body => {
-  //     console.log(body.headline);
-  //     console.log(body.summary);
+  axios({
+    method: "GET",
+    url:
+      "https://finnhub.io/api/v1/stock/profile2?symbol=" +
+      code +
+      "&token=" +
+      apiKey,
+    responseType: { json: true }
+  }).then(body => {
+    console.log("     ------     ");
+    console.log("Country: " + body.country);
+    console.log("Currency: " + body.currency);
+    console.log("Listed Exchange: " + body.exchange);
+    console.log(body.logo);
+    console.log("_______________");
 
-  //     res.render("index", body);
-  //   });
-  // });
+    res.render("index", body);
+  });
+  // Route for getting market news data
+  app.get("/market-news", (req, res) => {
+    axios({
+      method: "GET",
+      url: "https://finnhub.io/api/v1/news?category=general&token=" + apiKey,
+      responseType: { json: true }
+    }).then(body => {
+      console.log(body.headline);
+      console.log(body.summary);
+
+      res.render("index", body);
+    });
+  });
 
   // Route for getting stock price data
-  // app.get("/stock-price", (req, res) => {
-  //   axios({
-  //     method: "GET",
-  //     url:
-  //       "https://finnhub.io/api/v1/quote?symbol=" + code + "&token=" + apiKey,
-  //     responseType: { json: true }
-  //   }).then(body => {
-  //     console.log("     ------     ");
-  //     console.log("Open price for " + code + ": " + body.o);
-  //     console.log("Daily high for " + code + ": " + body.h);
-  //     console.log("Daily low for " + code + ": " + body.l);
-  //     console.log("Current price for " + code + ": " + body.c);
-  //     console.log("_______________");
+  app.get("/stock-price", (req, res) => {
+    axios({
+      method: "GET",
+      url:
+        "https://finnhub.io/api/v1/quote?symbol=" + code + "&token=" + apiKey,
+      responseType: { json: true }
+    }).then(body => {
+      console.log("     ------     ");
+      console.log("Open price for " + code + ": " + body.o);
+      console.log("Daily high for " + code + ": " + body.h);
+      console.log("Daily low for " + code + ": " + body.l);
+      console.log("Current price for " + code + ": " + body.c);
+      console.log("_______________");
 
-  //     res.render("index", body);
-  //   });
-  // });
+      res.render("index", body);
+    });
+  });
+
+  app.get("/userSummery", (req, res) => {
+    if (req.user) {
+      res.render("userSummery");
+    } else {
+      res.render("login");
+    }
+  });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
