@@ -34,10 +34,46 @@ module.exports = function(app) {
       });
   });
 
+  app.post("/api/buy", (req, res) => {
+    console.log("test11");
+    console.log("test 16", db.UserStocks);
+    db.Stocks.create({
+      Code: req.body.data.Code,
+      Company: req.body.data.Company,
+      PurchasePrice: req.body.data.PurchasePrice,
+      SoldPrice: req.body.data.SoldPrice,
+      Units: req.body.data.Units,
+      Watched: req.body.data.Watched
+    })
+      .then(result => {
+        console.log(result);
+        console.log("test 15", result.dataValues.id);
+        console.log("test 16", db.UserStocks);
+        console.log(req.user);
+        req.user.addStocks(result)
+        // db.UserStocks.create({
+        //   UserId: req.user.id,
+        //   StockId: result.dataValues.id
+        // })
+          .then(() => {
+            res.send("ok");
+          })
+          .catch(err => {
+            console.log("1",err);
+            res.status(500).json(err);
+          });
+        res.send("ok");
+      })
+      .catch(err => {
+        console.log("2",err);
+        res.status(401).json(err);
+      });
+  });
+
   app.post("/api/card", (req, res) => {
     console.log("test11");
     console.log(req.user);
-    // req.user.createCards(
+    //req.user.createCards(
     db.Cards.create({
       longNumber: req.body.data.longCard,
       expire: req.body.data.expire,

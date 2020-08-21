@@ -4,22 +4,21 @@ $(document).ready(() => {
   const code = $("input#code-input");
   const company = $("input#company-input");
   const PurchasePrice = $("input#purchasePrice-input");
-  const SoldPrice= $("input#units-input");
-  const watched = $("input#watched-input");
+  const SoldPrice = $("input#units-input");
   let userData;
   // When the signup button is clicked, we validate the email and password are not blank
-  let userData;
+  console.log("test13");
 
-  // When the signup button is clicked, we validate the email and password are not blank
-  buy.on("submit", event => {
+  buy.on("click", event => {
     event.preventDefault();
+    console.log("test14");
     userData = {
-        Code: "DYD",
-        Company: "Dumb",
-        PurchasePrice: 10,
-        SoldPrice: "",
-        Units: 30,
-        Watched: 0
+      Code: "DYD",
+      Company: "Dumb",
+      PurchasePrice: 10,
+      SoldPrice: "",
+      Units: 30,
+      Watched: 0
       //Code: code.val().trim(),
       //Company: company.val().trim(),
       //PurchasePrice: PurchasePrice.val().trim(),
@@ -29,10 +28,10 @@ $(document).ready(() => {
     };
 
     if (
-      !userData.code ||
-      !userData.company ||
-      !userData.PurchasePrice||
-      !userData.units
+      !userData.Code ||
+      !userData.Company ||
+      !userData.PurchasePrice ||
+      !userData.Units
     ) {
       return;
     }
@@ -49,12 +48,13 @@ $(document).ready(() => {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function purchase() {
+    console.log("test12");
     $.post("/api/buy", {
       data: userData
     })
       // eslint-disable-next-line no-empty-function
       .then(() => {
-        window.location.replace("/");
+        window.location.replace("/trade");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);

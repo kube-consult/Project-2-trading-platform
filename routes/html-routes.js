@@ -4,8 +4,10 @@
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
-
 const unirest = require("unirest");
+const axios = require("axios");
+apiKey = "bsrlqnv48v6tucpgg81g";
+const code = "AMZN";
 
 // const axios = require("axios");
 
