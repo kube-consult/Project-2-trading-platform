@@ -33,7 +33,6 @@ a.nav-link{
 
 
 footer {
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -41,8 +40,6 @@ footer {
   text-align: center;
   background-color: #231f20
 }
-
-
 
 
 a.button1{
@@ -79,8 +76,8 @@ h4 {
   margin: 2rem 0rem 1rem;
 }
 
-.table-image {
+/* .table-image {
   td, th {
     vertical-align: middle;
   }
-}
+} */

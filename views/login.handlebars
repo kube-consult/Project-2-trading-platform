@@ -4,7 +4,7 @@
   <div class="row justify-content-between">
     {{!-- leftSide --}}
   {{> leftSide}}
-  <div class="container col-sm-6">
+  <div class="container col-sm-6 bg-secondary text-white">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h2>Login Form</h2>
@@ -17,10 +17,10 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="password-input" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-default">Login</button>
+          <button type="submit" class="btn btn-primary">Login</button>
         </form>
         <br />
-        <p>Or sign up <a href="/signup">here</a></p>
+        <p>Or sign up <a href="/signup"><button type="submit" class="btn btn-success">here</button></a></p>
       </div>
     </div>
   </div>
