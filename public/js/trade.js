@@ -3,7 +3,7 @@ $(document).ready(() => {
   const buy = $("#input-buy");
   const searchgo = $("#input-search");
   const code = $("input#code-input");
-  const company = $("input#company-input");
+  //const Company = $("input#company-input");
   const PurchasePrice = $("input#purchasePrice-input");
   const SoldPrice = $("input#units-input");
   let userData;

@@ -2,7 +2,6 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -56,7 +55,7 @@ module.exports = function(app) {
 
   app.post("/api/card", async (req, res) => {
     try {
-      console.log("test",req);
+      console.log("test", req);
       await db.Cards.create({
         longNumber: req.body.data.longNumber,
         expire: req.body.data.expire,

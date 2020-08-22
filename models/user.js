@@ -45,8 +45,7 @@ module.exports = function(sequelize, DataTypes) {
   });
   User.associate = function(models) {
     User.belongsToMany(models.Stocks, {
-      through: "UserStocks",
-
+      through: "UserStocks"
     });
     User.hasMany(models.Cards, {
       onDelete: "cascade"

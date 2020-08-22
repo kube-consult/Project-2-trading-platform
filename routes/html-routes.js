@@ -125,14 +125,8 @@ module.exports = function(app) {
   app.get("/userSummery", async (req, res) => {
     try {
       if (req.user) {
-      //  const stock = await db.Stocks.findAll({
-       //   where: {
-        //    UserId: req.user.id
-       //   }
-       // });
-       const user = await db.User.findByPk(req.user.id);
-       const stock = await user.getStocks();
-
+        const user = await db.User.findByPk(req.user.id);
+        const stock = await user.getStocks();
         console.log("stock", stock);
         res.render("userSummery", { stk: stock });
       } else {
