@@ -51,10 +51,7 @@ $(document).ready(() => {
     };
     console.log(userData);
 
-    if (
-      !userData.Code ||
-      !userData.Company 
-    ) {
+    if (!userData.Code || !userData.Company) {
       return;
     }
     // If we have an email and password, run the signUpUser function
