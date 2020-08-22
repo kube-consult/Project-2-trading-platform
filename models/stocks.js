@@ -29,7 +29,10 @@ module.exports = function(sequelize, DataTypes) {
   });
   Stocks.associate = function(models) {
     Stocks.belongsToMany(models.User, {
-      through: "Owned"
+      through: "UserStocks",
+      as: "User",
+      foreignKey: "StockId",
+      otherKey: "UserId"
     });
   };
 

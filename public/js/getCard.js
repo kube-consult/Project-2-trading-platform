@@ -10,13 +10,13 @@ $(document).ready(() => {
   signUpForm.on("submit", event => {
     event.preventDefault();
     userData = {
-      longCard: longCard.val().trim(),
+      longNumber: longCard.val().trim(),
       expire: expire.val().trim(),
       lastThree: lastThree.val().trim()
     };
     console.log("test 5");
 
-    if (!userData.longCard || !userData.expire || !userData.lastThree) {
+    if (!userData.longNumber || !userData.expire || !userData.lastThree) {
       return;
     }
     // If we have an lastThree and password, run the signUpUser function
