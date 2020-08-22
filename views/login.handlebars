@@ -1,9 +1,8 @@
-  {{> header}}
-
 <div class="container-fluid">
   <div class="row justify-content-between">
-    {{!-- leftSide --}}
-  {{> leftSide}}
+
+ {{> leftSide data=data.news}}
+ 
   <div class="container col-sm-6 bg-secondary text-white">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -25,7 +24,7 @@
     </div>
   </div>
 <!-- Right Side -->
-    {{> rightSide}}
+     {{> rightSide data=data.stock}}
   </div>
 </div>
-  {{> footer}}
+ 

@@ -20,52 +20,52 @@ req.end(res => {
   console.log(res.body);
 });
 
-unirest("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news/AAPL");
+// unirest("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news/AAPL");
 
-req.headers({
-  "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
-  "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc",
-  useQueryString: true
-});
+// req.headers({
+//   "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
+//   "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc",
+//   useQueryString: true
+// });
 
-req.end(res => {
-  if (res.error) {
-    throw new Error(res.error);
-  }
+// req.end(res => {
+//   if (res.error) {
+//     throw new Error(res.error);
+//   }
 
-  console.log(res.body);
-});
+//   console.log(res.body);
+// });
 
-unirest("GET", "https://morning-star.p.rapidapi.com/news/list");
+// const req = unirest("GET", "https://morning-star.p.rapidapi.com/news/list");
 
-req.query({
-  performanceId: "0P0000OQN8"
-});
+// req.query({
+//   performanceId: "0P0000OQN8"
+// });
 
-req.headers({
-  "x-rapidapi-host": "morning-star.p.rapidapi.com",
-  "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc",
-  useQueryString: true
-});
+// req.headers({
+//   "x-rapidapi-host": "morning-star.p.rapidapi.com",
+//   "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc",
+//   useQueryString: true
+// });
 
-req.end(res => {
-  if (res.error) {
-    throw new Error(res.error);
-  }
+// req.end(res => {
+//   if (res.error) {
+//     throw new Error(res.error);
+//   }
 
-  console.log(res.body);
-});
+//   console.log(res.body);
+// });
 
-// const axios = require("axios");
+// // const axios = require("axios");
 
-// apiKey = "bsrlqnv48v6tucpgg81g";
+// // apiKey = "bsrlqnv48v6tucpgg81g";
 
-// const code = "AMZN"; // just an example - replace with user input/search later on
+// // const code = "AMZN"; // just an example - replace with user input/search later on
 
-// // FINNHUB
-// // Get company profile data
-// axios({
-//   method: "GET",
+// // // FINNHUB
+// // // Get company profile data
+// // axios({
+// //   method: "GET",
 //   url:
 //     "https://finnhub.io/api/v1/stock/profile2?symbol=" +
 //     code +

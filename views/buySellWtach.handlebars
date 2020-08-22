@@ -1,14 +1,13 @@
-  {{>header}}
+
 
 <div class="container-fluid">
   <div class="row justify-content-between">
     {{!-- leftSide --}}
-    {{> leftSide}}
+   {{> leftSide data=data.news}}
     <!-- Main -->
    
     <!-- Right Side -->
-    {{> rightSide}}
+  {{> rightSide data=data.stock}}
   </div>
 </div>
 
-  {{> footer}}
