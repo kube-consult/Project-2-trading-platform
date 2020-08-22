@@ -1,6 +1,7 @@
 $(document).ready(() => {
   // Getting references to our form and input
   const buy = $("#input-buy");
+  const searchgo = $("#input-search");
   const code = $("input#code-input");
   const company = $("input#company-input");
   const PurchasePrice = $("input#purchasePrice-input");
@@ -43,6 +44,13 @@ $(document).ready(() => {
     SoldPrice.val("");
     Units.val("");
     Watched.val("");
+  });
+
+  searchgo.on("click", event => {
+    event.preventDefault();
+    const value = $("input#search-input");
+    const input = value.val().trim();
+    console.log(input);
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page

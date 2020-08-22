@@ -4,6 +4,9 @@
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+// Requiring our models and passport as we've configured it
+const db = require("../models");
+const passport = require("../config/passport")
 const unirest = require("unirest");
 const axios = require("axios");
 apiKey = "bsrlqnv48v6tucpgg81g";
@@ -42,14 +45,6 @@ module.exports = function(app) {
       res.render("login");
     } else {
       res.render("cards");
-    }
-  });
-
-  app.get("/userSummery", (req, res) => {
-    if (req.user) {
-      res.render("userSummery");
-    } else {
-      res.render("login");
     }
   });
 
@@ -127,11 +122,25 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/userSummery", (req, res) => {
-    if (req.user) {
-      res.render("userSummery");
-    } else {
-      res.render("login");
+  app.get("/userSummery", async (req, res) => {
+    try {
+      if (req.user) {
+      //  const stock = await db.Stocks.findAll({
+       //   where: {
+        //    UserId: req.user.id
+       //   }
+       // });
+       const user = await db.User.findByPk(req.user.id);
+       const stock = await user.getStocks();
+
+        console.log("stock", stock);
+        res.render("userSummery", { stk: stock });
+      } else {
+        res.render("login");
+      }
+    } catch (e) {
+      console.log(e);
+      res.end();
     }
   });
 

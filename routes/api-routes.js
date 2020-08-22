@@ -2,6 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
+
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -34,60 +35,51 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/buy", (req, res) => {
-    console.log("test11");
-    console.log("test 16", db.UserStocks);
-    db.Stocks.create({
-      Code: req.body.data.Code,
-      Company: req.body.data.Company,
-      PurchasePrice: req.body.data.PurchasePrice,
-      SoldPrice: req.body.data.SoldPrice,
-      Units: req.body.data.Units,
-      Watched: req.body.data.Watched
-    })
-      .then(result => {
-        console.log(result);
-        console.log("test 15", result.dataValues.id);
-        console.log("test 16", db.UserStocks);
-        console.log(req.user);
-        req.user.addStocks(result)
-        // db.UserStocks.create({
-        //   UserId: req.user.id,
-        //   StockId: result.dataValues.id
-        // })
-          .then(() => {
-            res.send("ok");
-          })
-          .catch(err => {
-            console.log("1",err);
-            res.status(500).json(err);
-          });
-        res.send("ok");
-      })
-      .catch(err => {
-        console.log("2",err);
-        res.status(401).json(err);
+  app.post("/api/buy", async (req, res) => {
+    try {
+      const stock = await db.Stocks.create({
+        Code: req.body.data.Code,
+        Company: req.body.data.Company,
+        PurchasePrice: req.body.data.PurchasePrice,
+        SoldPrice: req.body.data.SoldPrice,
+        Units: req.body.data.Units,
+        Watched: req.body.data.Watched
       });
+      const user = await db.User.findByPk(req.user.id);
+      await user.addStocks(stock);
+      res.send("ok");
+    } catch (e) {
+      console.log(e);
+      res.end();
+    }
   });
 
-  app.post("/api/card", (req, res) => {
-    console.log("test11");
-    console.log(req.user);
-    //req.user.createCards(
-    db.Cards.create({
-      longNumber: req.body.data.longCard,
-      expire: req.body.data.expire,
-      lastThree: req.body.data.lastThree,
-      UserId: req.user.id
-    })
-      //)
-      .then(() => {
-        res.send("ok");
-      })
-      .catch(err => {
-        res.status(401).json(err);
+  app.post("/api/card", async (req, res) => {
+    try {
+      console.log("test",req);
+      await db.Cards.create({
+        longNumber: req.body.data.longNumber,
+        expire: req.body.data.expire,
+        lastThree: req.body.data.lastThree,
+        UserId: req.user.id
       });
+      res.send("ok");
+    } catch (e) {
+      console.log(e);
+      res.end();
+    }
   });
+  //longNumber: req.body.data.longCard,
+  //expire: req.body.data.expire,
+  // lastThree: req.body.data.lastThree
+  //    })
+  // .then(() => {
+  //     res.send("ok");
+  //   })
+  //  .catch(err => {
+  //    res.status(401).json(err);
+  //   });
+  //});
 
   // Route for logging user out
   app.get("/logout", (req, res) => {
