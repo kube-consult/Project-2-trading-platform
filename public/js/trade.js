@@ -51,6 +51,31 @@ $(document).ready(() => {
     const value = $("input#search-input");
     const input = value.val().trim();
     console.log(input);
+    const URL =
+      "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/AAPL/financial-data";
+    $.ajax({
+      url: URL,
+      type: 'GET',
+      dataType: "json",
+      headers: {
+        "Accept": "application/json",
+        "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
+        "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc"
+      },
+      contentType: "application/json; charset=utf-8",
+      success: function(result) {
+        console.log(result);
+        console.log("test", result.financialData);
+        console.log("test", result.financialData.currentPrice.fmt);
+        console.log("test", result.financialData.debtToEquity.fmt);
+        console.log("test", result.financialData.grossProfits.fmt);
+        console.log("test", result.financialData.recommendationKey);
+        console.log("test", result.financialData.grossMargins.fmt);
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    });
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
