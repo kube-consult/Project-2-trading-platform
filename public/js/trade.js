@@ -1,32 +1,28 @@
 $(document).ready(() => {
-  // Getting references to our form and input
   const buy = $("#input-buy");
+  const watch = $("#input-watch");
   const searchgo = $("#input-search");
-  const code = $("input#code-input");
-  //const Company = $("input#company-input");
-  const PurchasePrice = $("input#purchasePrice-input");
-  const SoldPrice = $("input#units-input");
+  const units = $("input#stock-input");
   let userData;
+  let stockBuy;
+  let stockPrice;
+
   // When the signup button is clicked, we validate the email and password are not blank
   console.log("test13");
 
   buy.on("click", event => {
     event.preventDefault();
     console.log("test14");
+    const uni = units.val().trim();
     userData = {
-      Code: "DYD",
-      Company: "Dumb",
-      PurchasePrice: 10,
-      SoldPrice: "",
-      Units: 30,
+      Code: stockBuy,
+      Company: stockBuy,
+      PurchasePrice: stockPrice,
+      SoldPrice: 0,
+      Units: uni,
       Watched: 0
-      //Code: code.val().trim(),
-      //Company: company.val().trim(),
-      //PurchasePrice: PurchasePrice.val().trim(),
-      //SoldPrice: soldPrice.val().trim(),
-      //Units: Units.val().trim(),
-      //Watched: Watched.val().trim()
     };
+    console.log(userData);
 
     if (
       !userData.Code ||
@@ -38,23 +34,104 @@ $(document).ready(() => {
     }
     // If we have an email and password, run the signUpUser function
     purchase();
-    code.val("");
-    Company.val("");
-    PurchasePrice.val("");
-    SoldPrice.val("");
-    Units.val("");
-    Watched.val("");
+    searchgo.val("");
+    units.val("");
+  });
+
+  watch.on("click", event => {
+    event.preventDefault();
+    console.log("test14");
+    userData = {
+      Code: stockBuy,
+      Company: stockBuy,
+      PurchasePrice: 0,
+      SoldPrice: 0,
+      Units: 0,
+      Watched: 1
+    };
+    console.log(userData);
+
+    if (!userData.Code || !userData.Company) {
+      return;
+    }
+    // If we have an email and password, run the signUpUser function
+    purchase();
+    searchgo.val("");
+    units.val("");
   });
 
   searchgo.on("click", event => {
     event.preventDefault();
+    $("#results").empty();
+    $("#stock-name").empty();
     const value = $("input#search-input");
-    const input = value.val().trim();
-    console.log(input);
+    stockBuy = value.val().trim();
+    console.log(stockBuy);
+    const URL =
+      "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/" +
+      stockBuy +
+      "/financial-data";
+    $.ajax({
+      url: URL,
+      type: "GET",
+      dataType: "json",
+      headers: {
+        Accept: "application/json",
+        "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
+        "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc"
+      },
+      contentType: "application/json; charset=utf-8",
+      success: function(result) {
+        stockPrice = result.financialData.currentPrice.fmt;
+
+        $("<h3>", {
+          html: stockBuy
+        }).appendTo($("#stock-name"));
+
+        const arr = [
+          {
+            name: "CurrentPrice",
+            value: result.financialData.currentPrice.fmt
+          },
+          {
+            name: "debt To Equity",
+            value: result.financialData.debtToEquity.fmt
+          },
+          {
+            name: "Gross Profits",
+            value: result.financialData.grossProfits.fmt
+          },
+          {
+            name: "Recomendation",
+            value: result.financialData.recommendationKey
+          },
+          {
+            name: "Gross Margins",
+            value: result.financialData.grossMargins.fmt
+          }
+        ];
+        arr.forEach(element => {
+          $("<tr>", {})
+            .append(
+              $("<th>", {
+                //scope: "row"
+              }),
+              $("<td>", {
+                text: element.name
+              }),
+              $("<td>", {
+                text: element.value
+              })
+            )
+            .appendTo($("#results"));
+        });
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    });
   });
 
-  // Does a post to the signup route. If successful, we are redirected to the members page
-  // Otherwise we log any errors
   function purchase() {
     console.log("test12");
     $.post("/api/buy", {
@@ -62,7 +139,7 @@ $(document).ready(() => {
     })
       // eslint-disable-next-line no-empty-function
       .then(() => {
-        window.location.replace("/trade");
+        window.location.replace("/userSummery");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
