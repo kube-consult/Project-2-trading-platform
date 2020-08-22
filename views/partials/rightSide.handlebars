@@ -1,51 +1,45 @@
 <div class="col-sm-3 bg-dark text-white">
   <h2>Stocks</h2>
   <table class="table table-hover table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Current Price</th>
-      </tr>
-      <th scope="col">High Price</th>
-      </tr>
-      <th scope="col">Low Price</th>
-      </tr>
-      <th scope="col">Mean Price</th>
-      </tr>
-      <th scope="col">Total Debt</th>
-      </tr>
-      <th scope="col">Debt to Equity</th>
-      </tr>
-      <th scope="col">Revenue per share</th>
-      </tr>
-      <th scope="col">Gross Profits</th>
-      </tr>
-      <th scope="col">Return on Equity</th>
-      </tr>
-      </tr>
-    </thead>
+  
     {{#each data}}
     <tr>
+      <th scope="col">Current Price</th>
       <td>{{this.currentPrice.fmt}}</td>
     </tr>
-    <td>{{this.targetHighPrice.fmt}}</td>
+    <tr>
+      <th scope="col">High Price</th>
+      <td>{{this.targetHighPrice.fmt}}</td>
     </tr>
-    <td>{{this.targetLowPrice.fmt}}</td>
+    <tr>
+      <th scope="col">Low Price</th>
+      <td>{{this.targetLowPrice.fmt}}</td>
     </tr>
-    <td>{{this.targetMeanPrice.fmt}}</td>
+    <tr>
+      <th scope="col">Mean Price</th>
+      <td>{{this.targetMeanPrice.fmt}}</td>
     </tr>
-    <td>{{this.totalDebt.fmt}}</td>
+    <tr>
+      <th scope="col">Total Debt</th>
+      <td>{{this.totalDebt.fmt}}</td>
     </tr>
-    <td>{{this.debtToEquity.fmt}}</td>
+    <tr>
+      <th scope="col">Debt to Equity</th>
+      <td>{{this.debtToEquity.fmt}}</td>
     </tr>
+    <th scope="col">Revenue per share</th>
     <td>{{this.revenuePerShare.fmt}}</td>
     </tr>
-    <td>{{this.grossProfits.fmt}}</td>
+    <tr>
+      <th scope="col">Gross Profits</th>
+      <td>{{this.grossProfits.fmt}}</td>
     </tr>
-    <td>{{this.returnOnEquity.fmt}}</td>
+    <tr>
+      <th scope="col">Return on Equity</th>
+      <td>{{this.returnOnEquity.fmt}}</td>
     </tr>
 
-    </tr>
     {{/each}}
-    </tbody>
+   
   </table>
 </div>
