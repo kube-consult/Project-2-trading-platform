@@ -44,7 +44,7 @@ $(document).ready(() => {
     userData = {
       Code: stockBuy,
       Company: stockBuy,
-      PurchasePrice: 0,
+      PurchasePrice: stockPrice,
       SoldPrice: 0,
       Units: 0,
       Watched: 1
