@@ -1,9 +1,6 @@
-  {{>header}}
-
 <div class="container-fluid">
   <div class="row justify-content-between">
-    {{!-- leftSide --}}
-    {{> leftSide}}
+ {{> leftSide data=data.news}}
     <!-- Main -->
       <div class="container col-sm-6 bg-secondary text-white">
     <div class="row">
@@ -15,7 +12,7 @@
               <br>
     <a href="something" id="input-trade" class="button1">Trade</a>
 
-        <a href="something" class="button1">Invest</a>
+        <a href="something" id="input-invest" class="button1">Invest</a>
   <a href="something" class="button1">Sell</a>
 
   <h2>Stocks</h2>
@@ -72,8 +69,8 @@
     </div>
   </div>
     <!-- Right Side -->
-    {{> rightSide}}
+    {{> rightSide data=data.stock}}
   </div>
 </div>
 
-  {{> footer}}
+ 

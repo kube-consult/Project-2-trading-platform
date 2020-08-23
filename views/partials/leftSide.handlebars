@@ -1,3 +1,16 @@
 <div class="col-sm-3 bg-dark text-white">
-      One of two columns
-    </div>
+  <h2>Market News</h2>
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Headline</th>
+      </tr>
+    </thead>
+    {{#each data}}
+    <tr>
+      <td>{{this.title}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</div>

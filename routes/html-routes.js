@@ -1,138 +1,138 @@
-// Requiring path to so we can use relative routes to our HTML files
-// const path = require("path");
-// const express = require("express");
-
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const unirest = require("unirest");
-const axios = require("axios");
+//const axios = require("axios");
 apiKey = "bsrlqnv48v6tucpgg81g";
-const code = "AMZN";
-
-// const axios = require("axios");
-
-// apiKey = "bsrlqnv48v6tucpgg81g";
-
-// const code = "AMZN";
+//const code = "AMZN";
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
-    res.render("index");
-  });
-
-  app.get("/members", (req, res) => {
-    res.render("members");
+    allData().then(response => {
+      res.render("index", { data: response });
+    });
   });
 
   app.get("/signup", (req, res) => {
-    res.render("signup");
+    allData().then(response => {
+      // console.log(xyz);
+      console.log(response);
+      res.render("signup", { data: response });
+    });
   });
 
   app.get("/login", (req, res) => {
-    res.render("login");
+    allData().then(response => {
+      // console.log(xyz);
+      console.log(response);
+      res.render("login", { data: response });
+    });
   });
 
   app.get("/trade", (req, res) => {
-    console.log("test 2");
-    res.render("trade");
+    allData().then(response => {
+      if (!req.user) {
+        res.render("login", { data: response });
+      } else {
+        res.render("trade", { data: response });
+      }
+    });
   });
 
   app.get("/cards", (req, res) => {
-    if (!req.user) {
-      res.render("login");
-    } else {
-      res.render("cards");
-    }
-  });
-
-  // Route for getting financial data
-  app.get("/company-profile", req => {
-    unirest(
-      "GET",
-      "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/AAPL/financial-data"
-    );
-
-    req.headers({
-      "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
-      "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc",
-      useQueryString: true
-    });
-
-    req.end(res => {
-      if (res.error) {
-        throw new Error(res.error);
+    allData().then(response => {
+      if (!req.user) {
+        res.render("login", { data: response });
+      } else {
+        res.render("cards", { data: response });
       }
-
-      console.log(res.body);
-      res.render("index", body);
     });
   });
 
-  axios({
-    method: "GET",
-    url:
-      "https://finnhub.io/api/v1/stock/profile2?symbol=" +
-      code +
-      "&token=" +
-      apiKey,
-    responseType: { json: true }
-  }).then(body => {
-    console.log("     ------     ");
-    console.log("Country: " + body.country);
-    console.log("Currency: " + body.currency);
-    console.log("Listed Exchange: " + body.exchange);
-    console.log(body.logo);
-    console.log("_______________");
-
-    res.render("index", body);
-  });
-  // Route for getting market news data
-  app.get("/market-news", (req, res) => {
-    axios({
-      method: "GET",
-      url: "https://finnhub.io/api/v1/news?category=general&token=" + apiKey,
-      responseType: { json: true }
-    }).then(body => {
-      console.log(body.headline);
-      console.log(body.summary);
-
-      res.render("index", body);
+  app.get("/cards", (req, res) => {
+    allData().then(response => {
+      if (!req.user) {
+        res.render("login", { data: response });
+      } else {
+        res.render("cards", { data: response });
+      }
     });
   });
 
-  // Route for getting stock price data
-  app.get("/stock-price", (req, res) => {
-    axios({
-      method: "GET",
-      url:
-        "https://finnhub.io/api/v1/quote?symbol=" + code + "&token=" + apiKey,
-      responseType: { json: true }
-    }).then(body => {
-      console.log("     ------     ");
-      console.log("Open price for " + code + ": " + body.o);
-      console.log("Daily high for " + code + ": " + body.h);
-      console.log("Daily low for " + code + ": " + body.l);
-      console.log("Current price for " + code + ": " + body.c);
-      console.log("_______________");
-
-      res.render("index", body);
+  function getNews() {
+    return new Promise(resolve => {
+      unirest
+        .get("https://morning-star.p.rapidapi.com/news/list")
+        .headers({
+          Accept: "application/json",
+          "x-rapidapi-host": "morning-star.p.rapidapi.com",
+          "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc"
+        })
+        .query({
+          performanceId: "0P0000OQN8"
+        })
+        .end(response => {
+          // console.log(response.body);
+          resolve(response.body);
+        });
     });
-  });
+  }
+
+  function getStock() {
+    return new Promise(resolve => {
+      unirest
+        .get(
+          "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/AAPL/financial-data"
+        )
+        .headers({
+          Accept: "application/json",
+          "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
+          "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc"
+        })
+        .end(response => {
+          // console.log(response.body);
+          resolve(response.body);
+        });
+    });
+  }
+
+  function allData() {
+    return new Promise(resolve => {
+      const data = { news: {}, stock: {} };
+      getNews().then(response => {
+        data.news = response;
+        getStock().then(response => {
+          data.stock = response;
+          // console.log(data);
+          resolve(data);
+        });
+      });
+    });
+  }
 
   app.get("/userSummery", async (req, res) => {
     try {
-      if (req.user) {
-        const user = await db.User.findByPk(req.user.id);
-        const stock = await user.getStocks();
-        console.log("stock", stock);
-        res.render("userSummery", { stk: stock });
-      } else {
-        res.render("login");
-      }
+      //res.render("userSummery", { stk: stock });
+
+      allData().then(async response => {
+        try {
+          if (req.user) {
+            const user = await db.User.findByPk(req.user.id);
+            const stock = await user.getStocks();
+            console.log("stock", stock);
+            //res.render("userSummery", { data: response });
+            res.render("userSummery", { data: response, stk: stock });
+          } else {
+            res.render("login", { data: response });
+          }
+        } catch (e) {
+          console.log("error1", e);
+          res.end();
+        }
+      });
     } catch (e) {
-      console.log(e);
+      console.log("error2", e);
       res.end();
     }
   });
