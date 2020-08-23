@@ -31,8 +31,23 @@ module.exports = function(app) {
   });
 
   app.get("/trade", (req, res) => {
-    console.log("test 2");
-    res.render("trade");
+    allData().then(response => {
+      if (!req.user) {
+        res.render("login", { data: response });
+      } else {
+        res.render("trade", { data: response });
+      }
+    });
+  });
+
+    app.get("/cards", (req, res) => {
+    allData().then(response => {
+      if (!req.user) {
+        res.render("login", { data: response });
+      } else {
+        res.render("cards", { data: response });
+      }
+    });
   });
 
   app.get("/cards", (req, res) => {
@@ -45,34 +60,6 @@ module.exports = function(app) {
     });
   });
 
-<<<<<<< HEAD
-  // Route for getting financial data
-  app.get("/company-profile", req => {
-    unirest(
-      "GET",
-      "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/AAPL/financial-data"
-    );
-
-    req.headers({
-      "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
-      "x-rapidapi-key": "435f0cdaeamshd0fe4e59b8a1c27p16ae90jsn8bb53a2736cc",
-      useQueryString: true
-    });
-
-    req.end(res => {
-      if (res.error) {
-        throw new Error(res.error);
-=======
-  app.get("/userSummery", (req, res) => {
-    allData().then(response => {
-      if (req.user) {
-        res.render("userSummery", { data: response });
-      } else {
-        res.render("login", { data: response });
->>>>>>> 9d5564be02b792209f2983a6405aff14c6daaeb0
-      }
-    });
-  });
 
   function getNews() {
     return new Promise((resolve, reject) => {
@@ -109,25 +96,6 @@ module.exports = function(app) {
           resolve(response.body);
         });
     });
-<<<<<<< HEAD
-  });
-
-  app.get("/userSummery", async (req, res) => {
-    try {
-      if (req.user) {
-        const user = await db.User.findByPk(req.user.id);
-        const stock = await user.getStocks();
-        console.log("stock", stock);
-        res.render("userSummery", { stk: stock });
-      } else {
-        res.render("login");
-      }
-    } catch (e) {
-      console.log(e);
-      res.end();
-    }
-  });
-=======
   }
 
   function allData() {
@@ -143,7 +111,32 @@ module.exports = function(app) {
       });
     });
   }
->>>>>>> 9d5564be02b792209f2983a6405aff14c6daaeb0
+
+  app.get("/userSummery", async (req, res) => {
+    try {
+      //res.render("userSummery", { stk: stock });
+
+      allData().then(async response => {
+        try {
+          if (req.user) {
+            const user = await db.User.findByPk(req.user.id);
+            const stock = await user.getStocks();
+            console.log("stock", stock);
+            //res.render("userSummery", { data: response });
+            res.render("userSummery", {data: response, stk: stock});
+          } else {
+            res.render("login", { data: response });
+          }
+        } catch (e) {
+          console.log("error1",e);
+         res.end();
+        }
+      });
+    } catch (e) {
+      console.log("error2",e);
+      res.end();
+    }
+  });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
