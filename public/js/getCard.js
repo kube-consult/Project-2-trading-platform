@@ -34,7 +34,7 @@ $(document).ready(() => {
     })
       // eslint-disable-next-line no-empty-function
       .then(() => {
-        window.location.replace("/login");
+        window.location.replace("/userSummery");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
