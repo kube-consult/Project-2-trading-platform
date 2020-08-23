@@ -8,7 +8,7 @@ $(document).ready(() => {
     window.location.href = "/trade";
   });
 
-      // Getting references to our form and input
+  // Getting references to our form and input
   const invest = $("#input-invest");
 
   // When the signup button is clicked, we validate the email and password are not blank
@@ -16,5 +16,4 @@ $(document).ready(() => {
     event.preventDefault();
     window.location.href = "/cards";
   });
-
 });

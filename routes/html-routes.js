@@ -3,9 +3,9 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const unirest = require("unirest");
-const axios = require("axios");
+//const axios = require("axios");
 apiKey = "bsrlqnv48v6tucpgg81g";
-const code = "AMZN";
+//const code = "AMZN";
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
@@ -40,7 +40,7 @@ module.exports = function(app) {
     });
   });
 
-    app.get("/cards", (req, res) => {
+  app.get("/cards", (req, res) => {
     allData().then(response => {
       if (!req.user) {
         res.render("login", { data: response });
@@ -60,9 +60,8 @@ module.exports = function(app) {
     });
   });
 
-
   function getNews() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       unirest
         .get("https://morning-star.p.rapidapi.com/news/list")
         .headers({
@@ -81,7 +80,7 @@ module.exports = function(app) {
   }
 
   function getStock() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       unirest
         .get(
           "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/AAPL/financial-data"
@@ -99,7 +98,7 @@ module.exports = function(app) {
   }
 
   function allData() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       const data = { news: {}, stock: {} };
       getNews().then(response => {
         data.news = response;
@@ -123,17 +122,17 @@ module.exports = function(app) {
             const stock = await user.getStocks();
             console.log("stock", stock);
             //res.render("userSummery", { data: response });
-            res.render("userSummery", {data: response, stk: stock});
+            res.render("userSummery", { data: response, stk: stock });
           } else {
             res.render("login", { data: response });
           }
         } catch (e) {
-          console.log("error1",e);
-         res.end();
+          console.log("error1", e);
+          res.end();
         }
       });
     } catch (e) {
-      console.log("error2",e);
+      console.log("error2", e);
       res.end();
     }
   });
